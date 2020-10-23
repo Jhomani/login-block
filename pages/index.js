@@ -1,20 +1,24 @@
-import Head from 'next/head';
+import Link from 'next/link';
 
 export default function Home() {
   return (
     <div className="container">
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
+      <Head>
+        <title>My app</title>
+      </Head>
+      <Link as='/login' href="/login">
+        <button>
+          go to login
+        </button>
+      </Link>
+      <style jsx>{`
+        .container {
+          height: 100vh;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
         }
       `}</style>
     </div>
