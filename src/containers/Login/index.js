@@ -8,9 +8,12 @@ import { Form, Input, Button, message } from 'antd';
 export function Login() {
   const [form, setForm] = useState({ email: '', password: '' })
 
+  const [formule] = Form.useForm();
+
   const handleSubmit = (value) => {
-    setForm(value);
+    console.log(value)
     message.success('the datas was submit!!');
+    formule.resetFields();
   }
 
   useEffect(() => {
@@ -22,11 +25,10 @@ export function Login() {
       <div className="login">
         <div className="login__card" >
           <h1 className="login__title">Welcome back!</h1>
-          <Form layout="vertical" onFinish={handleSubmit}>
+          <Form layout="vertical" onFinish={handleSubmit} form={formule} name="control-hooks">
             <Form.Item label="Email:" name="email">
               <Input
                 type="email"
-                name="email"
                 placeholder="Enter your email"
                 prefix={<MailOutlined />}
                 size="large"

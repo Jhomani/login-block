@@ -5,12 +5,13 @@ import { Form, Input, Button, DatePicker, message } from 'antd';
 
 export function Register() {
   const [showPassword, setShowPassport] = useState(false);
-  const [form, setForm] = useState({ email: '', password: '' })
+
+  const [formule] = Form.useForm();
 
   const handleSubmit = (value) => {
     console.log(value);
-    setForm({ email: '', name: '' })
     message.success('the datas was submit!!');
+    formule.resetFields();
   }
 
   useEffect(() => {
@@ -22,13 +23,10 @@ export function Register() {
       <div className="register">
         <div className="register__card" >
           <h1 className="register__title">Let's go!</h1>
-          <Form layout="vertical" onFinish={handleSubmit}>
+          <Form layout="vertical" onFinish={handleSubmit} form={formule} name="control-hooks">
             <Form.Item label="Email:" name="email">
               <Input
                 type="email"
-                name="email"
-                onChange={ev => setForm({ ...form, [ev.target.name]: ev.target.value })}
-                value={form.email}
                 placeholder="Enter your email"
                 prefix={<MailOutlined />}
                 size="large"
@@ -38,9 +36,6 @@ export function Register() {
               <div className="register__input">
                 <Input
                   type={showPassword ? 'text' : 'password'}
-                  onChange={ev => setForm({ ...form, [ev.target.name]: ev.target.value })}
-                  value={form.password}
-                  name="password"
                   placeholder="Enter your password"
                   prefix={<LockOutlined />}
                   size="large"
@@ -54,9 +49,6 @@ export function Register() {
             <Form.Item label="Full Name:" name="name">
               <Input
                 type="text"
-                name="name"
-                onChange={ev => setForm({ ...form, [ev.target.name]: ev.target.value })}
-                value={form.name}
                 placeholder="Enter your full name"
                 prefix={<UserOutlined />}
                 size="large"
@@ -65,9 +57,6 @@ export function Register() {
             <Form.Item label="Age:" name="age">
               <DatePicker
                 format="DD/MM/YYYY"
-                onChange={ev => setForm({ ...form, [ev.target.name]: ev.target.value })}
-                value={setForm.name}
-                name="age"
                 prefix={<ClockCircleOutlined />}
                 size="large"
                 on
