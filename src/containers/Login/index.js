@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react';
+
 import { Wrapper } from '../Wrapper/index';
+
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 
 export function Login() {
   const [form, setForm] = useState({ email: '', password: '' })
 
-  useEffect(() => {
+  const handleSubmit = (value) => {
+    setForm(value);
+    message.success('the datas was submit!!');
+  }
 
+  useEffect(() => {
+    message.success('the page was loaded')
   }, []);
 
   return (
@@ -15,8 +22,8 @@ export function Login() {
       <div className="login">
         <div className="login__card" >
           <h1 className="login__title">Welcome back!</h1>
-          <Form layout="vertical">
-            <Form.Item label="Email:">
+          <Form layout="vertical" onFinish={handleSubmit}>
+            <Form.Item label="Email:" name="email">
               <Input
                 type="email"
                 name="email"
@@ -25,11 +32,13 @@ export function Login() {
                 size="large"
               />
             </Form.Item>
-            <Form.Item label="Password:">
+            <Form.Item
+              label="Password:"
+              name="password"
+            >
               <div className="login__input">
                 <Input
                   type="password"
-                  name="password"
                   placeholder="Enter your password"
                   prefix={<LockOutlined />}
                   size="large"
@@ -38,7 +47,12 @@ export function Login() {
               </div>
             </Form.Item>
             <Form.Item>
-              <Button style={{ height: 40 }} type="primary" block >Login</Button>
+              <Button
+                style={{ height: 40 }}
+                type="primary"
+                htmlType="submit"
+                block
+              >Login</Button>
             </Form.Item>
           </Form>
         </div>
