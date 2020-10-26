@@ -3,9 +3,6 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <div className="container">
-      <Head>
-        <title>My app</title>
-      </Head>
       <Link as='/login' href="/login">
         <button>
           go to login
