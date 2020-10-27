@@ -1,21 +1,45 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import { Wrapper } from '../Wrapper/index';
 import { MailOutlined, LockOutlined, UserOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import { Form, Input, Button, DatePicker, message } from 'antd';
 
+const initialState = {
+  email: '',
+  password: '',
+  age: '',
+  name: ''
+}
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "GREET":
+      message.success('hello guy!!');
+      return { ...state, ...action }
+    default:
+      return { ...state, ...action }
+  }
+}
+
+
 export function Register() {
   const [showPassword, setShowPassport] = useState(false);
+  const [state, setState] = useReducer(reducer, initialState);
 
   const [formule] = Form.useForm();
 
   const handleSubmit = (value) => {
     console.log(value);
     message.success('the datas was submit!!');
+
+    // sent data to endpoint
+
+    setState(value);
+
     formule.resetFields();
   }
 
   useEffect(() => {
-    message.success('the page was loaded')
+    setState({ type: 'GREET' });
   }, []);
 
   return (
@@ -76,7 +100,7 @@ export function Register() {
           background: url('https://app-cdn.clickup.com/login-bg.5ff304517621ee7b0287.svg') no-repeat;
           background-position: bottom;
           background-size: cover;
-          height: calc(100vh - 92px);
+          height: calc(100vh - 137px);
           width: 100%;
           display: flex;
           flex-direction: column;

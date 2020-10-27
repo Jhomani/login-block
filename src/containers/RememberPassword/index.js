@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
 import { Wrapper } from '../Wrapper/index';
-import Link from 'next/link'
 
-import { MailOutlined, LockOutlined } from '@ant-design/icons';
+import { MailOutlined } from '@ant-design/icons';
 import { Form, Input, Button, message } from 'antd';
 
-export function Login() {
+export function RememberPassword() {
   const [form, setForm] = useState({ email: '', password: '' })
 
   const [formule] = Form.useForm();
@@ -23,7 +22,7 @@ export function Login() {
 
   return (
     <Wrapper inLogin>
-      <div className="login">
+      <div className="remember">
         <div className="login__card" >
           <h1 className="login__title">Welcome back!</h1>
           <Form layout="vertical" onFinish={handleSubmit} form={formule} name="control-hooks">
@@ -35,29 +34,13 @@ export function Login() {
                 size="large"
               />
             </Form.Item>
-            <Form.Item
-              label="Password:"
-              name="password"
-            >
-              <div className="login__input">
-                <Input
-                  type="password"
-                  placeholder="Enter your password"
-                  prefix={<LockOutlined />}
-                  size="large"
-                />
-                <Link as="/remember-password" href="/remember-password">
-                  <a>Forgot Password?</a>
-                </Link>
-              </div>
-            </Form.Item>
             <Form.Item>
               <Button
                 style={{ height: 40 }}
                 type="primary"
                 htmlType="submit"
                 block
-              >Login</Button>
+              >Send me the link</Button>
             </Form.Item>
           </Form>
         </div>
@@ -65,7 +48,7 @@ export function Login() {
       </div>
 
       <style jsx>{`
-        .login {
+        .remember {
           background: url('https://app-cdn.clickup.com/login-bg.5ff304517621ee7b0287.svg') no-repeat;
           background-position: bottom;
           background-size: cover;
@@ -78,7 +61,6 @@ export function Login() {
         }
         .login__card {
           width: 460px;
-          height: 380px;
           background:#fff;
           border-radius: 8px;
           box-shadow: 0 0 100px -52px rgba(0,0,0, 0.75);
@@ -115,6 +97,6 @@ export function Login() {
           }
         }
       `}</style>
-    </Wrapper >
+    </Wrapper>
   )
 }
