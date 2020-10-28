@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Button, Row, Col, Layout } from 'antd';
+import { Button, Col, Layout } from 'antd';
 
 export const Wrapper = ({ children, inLogin }) => {
   const router = useRouter();

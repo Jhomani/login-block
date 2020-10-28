@@ -11,10 +11,18 @@ export function Login() {
 
   const [formule] = Form.useForm();
 
-  const handleSubmit = (value) => {
-    console.log(value)
-    message.success('the datas was submit!!');
-    formule.resetFields();
+  const handleSubmit = async (value) => {
+    value.societyId = 'fafc7359-0139-43d7-9d00-1828d90cc407'
+
+    try {
+      const response = await fetch('https://dbcolegios.blockchainconsultora.com/users/login', { method: 'post', body: JSON.stringify(value), headers: { Accept: 'application/json', 'Content-Type': 'application/json' } });
+      const data = await response.json();
+      alert(`this is you Token: ${data.token}`)
+      message.success('Correct datas...')
+      formule.resetFields();
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   useEffect(() => {
