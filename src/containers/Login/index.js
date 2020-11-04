@@ -38,10 +38,14 @@ export function Login() {
       message.success('Correct datas...')
       formule.resetFields();
 
+      setForm(value);
+
     } catch (err) {
       console.log(err)
     }
   }
+
+  console.log(auth)
 
   useEffect(() => {
     message.success('the page was loaded')
@@ -84,12 +88,6 @@ export function Login() {
                 htmlType="submit"
                 block
               >Login</Button>
-              <Button
-                type="primary"
-                onClick={() => {
-                  console.log(auth);
-                }}
-              >Show is console the store</Button>
             </Form.Item>
           </Form>
         </div>

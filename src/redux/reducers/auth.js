@@ -17,7 +17,7 @@ const auth = (state = INIT_STATE, { type, payload }) => {
       return { ...state, tokenUser, dataUser: { ...dataUser } };
     }
     case USER_SINGUP_SUCCESS: {
-      return { ...state };
+      return { ...state, dataUser: { ...payload.dataUser } };
     }
     default:
       return { ...state };

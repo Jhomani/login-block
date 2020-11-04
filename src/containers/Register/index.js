@@ -3,6 +3,8 @@ import { Wrapper } from '../Wrapper/index';
 import { MailOutlined, LockOutlined, UserOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import { Form, Input, Button, DatePicker, message } from 'antd';
 
+import { useSelector, useDispatch } from 'react-redux';
+
 const initialState = {
   email: '',
   password: '',
@@ -20,23 +22,35 @@ const reducer = (state, action) => {
   }
 }
 
+import {
+  USER_SINGUP_SUCCESS
+} from '../../constants/ActionTypes'
 
 export function Register() {
   const [showPassword, setShowPassport] = useState(false);
   const [state, setState] = useReducer(reducer, initialState);
 
+  const dispach = useDispatch();
+  const auth = useSelector(store => store.auth);
+
   const [formule] = Form.useForm();
 
   const handleSubmit = (value) => {
-    console.log(value);
     message.success('the datas was submit!!');
 
     // sent data to endpoint
-
-    setState(value);
+    dispach({
+      type: USER_SINGUP_SUCCESS,
+      payload: {
+        dataUser: value
+      }
+    })
 
     formule.resetFields();
+    setState(value);
   }
+
+  console.log(auth)
 
   useEffect(() => {
     setState({ type: 'GREET' });
