@@ -6,8 +6,16 @@ import Link from 'next/link'
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
 import { Form, Input, Button, message } from 'antd';
 
+import { useSelector, useDispatch } from 'react-redux';
+
+import {
+  USER_SINGIN_SUCCESS
+} from '../../constants/ActionTypes'
+
 export function Login() {
   const [form, setForm] = useState({ email: '', password: '' })
+  const dispach = useDispatch();
+  const auth = useSelector(store => store.auth);
 
   const [formule] = Form.useForm();
 
@@ -18,8 +26,18 @@ export function Login() {
       const response = await fetch('https://dbcolegios.blockchainconsultora.com/users/login', { method: 'post', body: JSON.stringify(value), headers: { Accept: 'application/json', 'Content-Type': 'application/json' } });
       const data = await response.json();
       alert(`this is you Token: ${data.token}`)
+
+      dispach({
+        type: USER_SINGIN_SUCCESS,
+        payload: {
+          tokenUser: data.token,
+          dataUser: value
+        }
+      })
+
       message.success('Correct datas...')
       formule.resetFields();
+
     } catch (err) {
       console.log(err)
     }
@@ -61,11 +79,17 @@ export function Login() {
             </Form.Item>
             <Form.Item>
               <Button
-                style={{ height: 40 }}
+                style={{ height: 40, marginBottom: 10 }}
                 type="primary"
                 htmlType="submit"
                 block
               >Login</Button>
+              <Button
+                type="primary"
+                onClick={() => {
+                  console.log(auth);
+                }}
+              >Show is console the store</Button>
             </Form.Item>
           </Form>
         </div>
